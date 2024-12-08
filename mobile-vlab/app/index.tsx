@@ -9,7 +9,7 @@ SplashScreen.preventAutoHideAsync();
 
 // Set the animation options. This is optional.
 SplashScreen.setOptions({
-  duration: 1000,
+  duration: 5000,
   fade: true,
 });
 
@@ -51,8 +51,10 @@ export default function Index() {
   }
 
   return (
-    <View>
-      <Text>aasaad</Text>
+    <View
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      onLayout={onLayoutRootView}>
+      <Text>SplashScreen Demo! 👋</Text>
     </View>
   );
 }

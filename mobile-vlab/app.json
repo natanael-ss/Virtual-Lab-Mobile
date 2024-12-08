@@ -9,8 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.natanaelss.mobilevlab"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -46,6 +45,10 @@
       "eas": {
         "projectId": "d588643d-a045-4ccc-aeb5-2f8a96f393e2"
       }
+    },
+    "splash": {
+      "image": "./assets/images/splash.png"
     }
+    
   }
 }

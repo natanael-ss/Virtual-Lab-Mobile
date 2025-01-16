@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity,Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { loginUser } from '../src/api';
 
@@ -20,56 +20,56 @@ const Login = () => {
       Alert.alert('Login Failed', response.error);
     } else {
       Alert.alert('Login Successful', `Welcome ${response.name}`);
-      router.replace('/dashboard'); // Navigate to dashboard after login
+      router.replace('/dashboard');
     }
   };
 
- 
   return (
-    <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.logoLink}>
-          <Image source={require('../assets/images/icon.png')} style={styles.logoImage} />
-          <Text style={styles.logoText}>Spelling Bad</Text>
-        </TouchableOpacity>
-      </View>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <View style={styles.formContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.welcomeText}>Welcome Back</Text>
+          <Text style={styles.subtitle}>Please sign in to continue</Text>
+        </View>
 
-      {/* Form */}
-      <View style={styles.form}>
-        <Text style={styles.title}>LOG IN</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="username"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Log in</Text>
-        </TouchableOpacity>
-        <Text style={styles.signUpText}>
-          Tidak memiliki akun?{' '}
-          <Text style={styles.signUpLink} onPress={() => router.push('/register')}>
-            Sign up
-          </Text>
-        </Text>
-      </View>
+        <View style={styles.form}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Username</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your username"
+              placeholderTextColor="#999"
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+            />
+          </View>
 
-      {/* Footer */}
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2024 Spelling Bad. All rights reserved.</Text>
-        <View style={styles.footerLinks}>
-          <Text style={styles.footerLink}>About Us</Text>
-          <Text style={styles.footerLink}>Facebook</Text>
-          <Text style={styles.footerLink}>Twitter</Text>
-          <Text style={styles.footerLink}>Instagram</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your password"
+              placeholderTextColor="#999"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </View>
+
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+
+          <View style={styles.signUpContainer}>
+            <Text style={styles.signUpText}>Don't have an account? </Text>
+            <TouchableOpacity onPress={() => router.push('/register')}>
+              <Text style={styles.signUpLink}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -79,91 +79,106 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fdfdfd',
+    backgroundColor: '#f5f5f5',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: 'rgba(34, 34, 34, 0.9)',
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
-  logoLink: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  formContainer: {
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    margin: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
   },
-  logoImage: {
-    width: 40,
-    height: 40,
+  headerContainer: {
+    marginBottom: 32,
   },
-  logoText: {
-    color: '#fff',
-    marginLeft: 8,
+  welcomeText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
     fontSize: 16,
-  },
-  nav: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  navLink: {
-    color: '#fff',
+    color: '#666',
+    textAlign: 'center',
   },
   form: {
-    padding: 16,
-    alignItems: 'center',
+    width: '100%',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    textAlign: 'center',
+  inputContainer: {
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
   },
   input: {
     width: '100%',
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 5,
-    marginBottom: 15,
+    height: 50,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 12,
+    paddingHorizontal: 16,
     fontSize: 16,
+    color: '#333',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  forgotPassword: {
+    alignSelf: 'flex-end',
+    marginBottom: 24,
+  },
+  forgotPasswordText: {
+    color: '#666',
+    fontSize: 14,
   },
   button: {
-    width: '100%',
     backgroundColor: '#0b0423',
-    padding: 15,
-    borderRadius: 5,
+    paddingVertical: 16,
+    borderRadius: 12,
     alignItems: 'center',
+    marginBottom: 24,
+    shadowColor: '#0b0423',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+    letterSpacing: 1,
   },
-  signUpText: {
-    marginTop: 15,
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  signUpLink: {
-    color: '#007BFF',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
-  },
-  footer: {
-    backgroundColor: 'rgba(34, 34, 34, 0.9)',
-    padding: 16,
+  signUpContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  footerText: {
-    color: '#aaa',
+  signUpText: {
+    fontSize: 14,
+    color: '#666',
   },
-  footerLinks: {
-    flexDirection: 'row',
-    marginTop: 8,
-    gap: 16,
-  },
-  footerLink: {
-    color: '#bbb',
+  signUpLink: {
+    fontSize: 14,
+    color: '#0b0423',
+    fontWeight: 'bold',
   },
 });
 

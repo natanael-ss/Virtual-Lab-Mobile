@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView, Image} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { registerUser } from '../src/api';
 
@@ -27,156 +27,182 @@ const Register = () => {
       Alert.alert('Registration Failed', response.error);
     } else {
       Alert.alert('Registration Successful', `Welcome ${response.name}`);
-      router.replace('/login'); // Redirect to login page after registration
+      router.replace('/login');
     }
   };
 
   return (
-    <ScrollView style={styles.container}>
-    {/* Header */}
-    <View style={styles.header}>
-      <TouchableOpacity style={styles.logoLink}>
-        <Image source={require("../assets/images/icon.png")} style={styles.logoImage} />
-        <Text style={styles.logoText}>Spelling Bad</Text>
-      </TouchableOpacity>
-    </View>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <View style={styles.formContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.welcomeText}>Create Account</Text>
+          <Text style={styles.subtitle}>Please fill in the form to continue</Text>
+        </View>
 
-    {/* Form */}
-    <View style={styles.form}>
-      <Text style={styles.title}>SIGN UP</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        value={confPassword}
-        onChangeText={setConfPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-      <Text style={styles.signUpText}>
-        Sudah memiliki akun?{" "}
-        <Text style={styles.signUpLink} onPress={() => router.push("/login")}>
-          Log in
-        </Text>
-      </Text>
-    </View>
+        <View style={styles.form}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Full Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your full name"
+              placeholderTextColor="#999"
+              value={name}
+              onChangeText={setName}
+            />
+          </View>
 
-    {/* Footer */}
-    <View style={styles.footer}>
-      <Text style={styles.footerText}>© 2024 Spelling Bad. All rights reserved.</Text>
-      <View style={styles.footerLinks}>
-        <Text style={styles.footerLink}>About Us</Text>
-        <Text style={styles.footerLink}>Facebook</Text>
-        <Text style={styles.footerLink}>Twitter</Text>
-        <Text style={styles.footerLink}>Instagram</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Username</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Choose a username"
+              placeholderTextColor="#999"
+              value={username}
+              onChangeText={setUsername}
+              autoCapitalize="none"
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Create a password"
+              placeholderTextColor="#999"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Confirm Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Confirm your password"
+              placeholderTextColor="#999"
+              value={confPassword}
+              onChangeText={setConfPassword}
+              secureTextEntry
+            />
+          </View>
+
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+          </TouchableOpacity>
+
+          <View style={styles.loginContainer}>
+            <Text style={styles.loginText}>Already have an account? </Text>
+            <TouchableOpacity onPress={() => router.push('/login')}>
+              <Text style={styles.loginLink}>Log in</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </View>
-  </ScrollView>
-);
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  backgroundColor: "#fdfdfd",
-},
-header: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: 16,
-  backgroundColor: "rgba(34, 34, 34, 0.9)",
-},
-logoLink: {
-  flexDirection: "row",
-  alignItems: "center",
-},
-logoImage: {
-  width: 40,
-  height: 40,
-},
-logoText: {
-  color: "#fff",
-  marginLeft: 8,
-  fontSize: 16,
-},
-form: {
-  padding: 16,
-  alignItems: "center",
-},
-title: {
-  fontSize: 24,
-  fontWeight: "bold",
-  marginBottom: 16,
-  textAlign: "center",
-},
-input: {
-  width: "100%",
-  padding: 12,
-  borderWidth: 1,
-  borderColor: "#000",
-  borderRadius: 5,
-  marginBottom: 15,
-  fontSize: 16,
-},
-button: {
-  width: "100%",
-  backgroundColor: "#0b0423",
-  padding: 15,
-  borderRadius: 5,
-  alignItems: "center",
-},
-buttonText: {
-  color: "#fff",
-  fontSize: 16,
-  fontWeight: "bold",
-},
-signUpText: {
-  marginTop: 15,
-  fontSize: 14,
-  textAlign: "center",
-},
-signUpLink: {
-  color: "#007BFF",
-  fontWeight: "bold",
-  textDecorationLine: "underline",
-},
-footer: {
-  backgroundColor: "rgba(34, 34, 34, 0.9)",
-  padding: 16,
-  alignItems: "center",
-},
-footerText: {
-  color: "#aaa",
-},
-footerLinks: {
-  flexDirection: "row",
-  marginTop: 8,
-  gap: 16,
-},
-footerLink: {
-  color: "#bbb",
-},
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  formContainer: {
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    margin: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  headerContainer: {
+    marginBottom: 32,
+  },
+  welcomeText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+  },
+  form: {
+    width: '100%',
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: '#333',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  button: {
+    backgroundColor: '#0b0423',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 24,
+    shadowColor: '#0b0423',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+  },
+  loginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  loginLink: {
+    fontSize: 14,
+    color: '#0b0423',
+    fontWeight: 'bold',
+  },
 });
 
 export default Register;

@@ -54,20 +54,29 @@ export default function App() {
           membantu dalam rencananya. Selesaikan semua pengujian untuk mendapat pengakuan dari Speller White!
         </Text>
         <View style={styles.cardContainer}>
-          <TouchableOpacity style={styles.card} onPress={() => router.push('/activity1')}>
+          <TouchableOpacity style={styles.card}>
             <Image source={require('../assets/images/act1icon.png')} style={styles.cardImage} />
             <Text>Pilih Kata</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => router.push('/activity2')}>
+          <TouchableOpacity style={styles.card}>
             <Image source={require('../assets/images/act2icon.png')} style={styles.cardImage} />
             <Text>Susun Kata</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => router.push('/activity3')}>
+          <TouchableOpacity style={styles.card}>
             <Image source={require('../assets/images/act3icon.png')} style={styles.cardImage} />
             <Text>Lengkapi Kalimat</Text>
           </TouchableOpacity>
         </View>
       </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>© 2024 Spelling Bad. All rights reserved.</Text>
+          <View style={styles.footerLinks}>
+            <Text style={styles.footerLink}>About Us</Text>
+            <Text style={styles.footerLink}>Facebook</Text>
+            <Text style={styles.footerLink}>Twitter</Text>
+            <Text style={styles.footerLink}>Instagram</Text>
+          </View>
+        </View>
     </ScrollView>
   );
 }
@@ -108,5 +117,21 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 16, // Jarak antara gambar dan teks
+  },
+  footer: {
+    backgroundColor: "rgba(34, 34, 34, 0.9)",
+    padding: 16,
+    alignItems: "center",
+  },
+  footerText: {
+    color: "#aaa",
+  },
+  footerLinks: {
+    flexDirection: "row",
+    marginTop: 8,
+    gap: 16,
+  },
+  footerLink: {
+    color: "#bbb",
   },
 });

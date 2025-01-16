@@ -13,8 +13,6 @@ export default function Dashboard() {
           <Text style={styles.logoText}>Spelling Bad</Text>
         </TouchableOpacity>
         <View style={styles.nav}>
-          <Text style={styles.navLink} onPress={() => router.push("/login")}>Login</Text>
-          <Text style={styles.navLink} onPress={() => router.push("/register")}>Sign Up</Text>
           <Text style={styles.navLink} onPress={() => router.push("/")}>Log out</Text>
         </View>
       </View>
@@ -57,59 +55,33 @@ export default function Dashboard() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fdfdfd",
-  },
+  container: { flex: 1, backgroundColor: '#fdfdfd' },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 16,
-    backgroundColor: "rgba(34, 34, 34, 0.9)",
+    backgroundColor: 'rgba(34, 34, 34, 0.9)',
   },
-  logoLink: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  logoImage: {
-    width: 40,
-    height: 40,
-  },
-  logoText: {
-    color: "#fff",
-    marginLeft: 8,
-    fontSize: 16,
-  },
-  nav: {
-    flexDirection: "row",
-    gap: 16,
-  },
-  navLink: {
-    color: "#fff",
-  },
-  content: {
-    padding: 16,
-  },
-  title: {
-    fontSize: 18,
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  description: {
-    marginBottom: 16,
-  },
+  logoLink: { flexDirection: 'row', alignItems: 'center' },
+  logoImage: { width: 40, height: 40 },
+  logoText: { color: '#fff', marginLeft: 8, fontSize: 16 },
+  nav: { flexDirection: 'row', gap: 16 },
+  navLink: { color: '#fff' },
+  content: { padding: 16 },
+  title: { fontSize: 18, marginBottom: 16, textAlign: 'center' },
+  description: { marginBottom: 16 },
   cardContainer: {
-    flexDirection: "column",
-    gap:16,
+    flexDirection: 'column', // Mengatur list aktivitas ke bawah
+    gap: 16, // Jarak antar kartu
   },
   card: {
-    flexDirection: 'row',
-    alignItems: "center",
+    flexDirection: 'row', // Konten dalam kartu sejajar horizontal
+    alignItems: 'center',
     padding: 16,
-    backgroundColor: "#ddd",
+    backgroundColor: '#ddd',
     borderRadius: 8,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -117,7 +89,7 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 50,
     height: 50,
-    marginBottom: 16,
+    marginRight: 16, // Jarak antara gambar dan teks
   },
   resetActivity: {
     textAlign: "center",

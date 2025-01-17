@@ -136,22 +136,22 @@ const App = () => {
     const correctAnswer = page[currentPage].answer;
 
     if (answerSequence.length === 0) {
-      Alert.alert('Warning', 'Please arrange the words first!');
+      Alert.alert('Peringatan!', 'Susun kata terlebih dahulu, ya!');
       return;
     }
 
     if (JSON.stringify(answerSequence) === JSON.stringify(correctAnswer)) {
       if (currentPage < page.length - 1) {
-        Alert.alert('Correct! 🎉', 'Moving to the next question...');
+        Alert.alert('Benar! 👏', 'Jawabanmu tepat! Lanjut ke pertanyaan berikutnya...');
         setAnswerSequence([]);
         setCurrentPage((prev) => prev + 1);
       } else {
-        Alert.alert('Congratulations! 🎉', 'You have completed all questions!', [
-          { text: 'Go to Dashboard', onPress: () => router.push('/dashboard') },
+        Alert.alert('Selamat! 🎉', 'Kamu telah menyelesaikan aktivitas ini!', [
+          { text: 'Kembali ke Menu', onPress: () => router.push('/dashboard') },
         ]);
       }
     } else {
-      Alert.alert('Try Again', 'The sequence is not correct. Keep trying!');
+      Alert.alert('Salah! 😅', 'Urutannya belum tepat. Coba lagi ya!');
     }
   };
 

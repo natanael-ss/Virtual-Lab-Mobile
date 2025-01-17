@@ -68,7 +68,7 @@ export default function Activity1() {
 
   const handleAnswer = (index: number) => {
     if (index === questions[currentQuestion].correct) {
-      Alert.alert('Benar!', 'Jawaban kamu tepat!', [
+      Alert.alert('Benar! 👏', 'Jawabanmu tepat! Lanjut ke pertanyaan berikutnya...', [
         {
           text: 'Lanjut',
           onPress: () => {
@@ -76,15 +76,15 @@ export default function Activity1() {
               setCurrentQuestion(prev => prev + 1);
               setHintVisible(false);
             } else {
-                    Alert.alert('Congratulations! 🎉', 'You have completed all questions!', [
-                      { text: 'Go to Dashboard', onPress: () => router.push('/dashboard') },
+                    Alert.alert('Selamat! 🎉', 'Kamu telah menyelesaikan aktivitas ini!', [
+                      { text: 'Kembali ke Menu', onPress: () => router.push('/dashboard') },
                     ]);
                   } 
           },
         },
       ]);
     } else {
-      Alert.alert('Salah!', 'Jawaban tidak tepat, coba lagi!');
+      Alert.alert('Salah! 😅', 'Coba lagi ya!');
     }
   };
 

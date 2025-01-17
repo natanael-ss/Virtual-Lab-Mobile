@@ -63,7 +63,7 @@ const SpellingActivity = () => {
     const checkAnswer = () => {
         if (inputValue.toLowerCase().trim() === pages[currentPage].answer) {
             setIsCorrect(true);
-            Alert.alert('Benar! 👏', 'Jawabanmu tepat!');
+            Alert.alert('Benar! 👏', 'Jawabanmu tepat! Lanjut ke pertanyaan berikutnya...');
         } else {
             setIsCorrect(false);
             Alert.alert('Salah! 😅', 'Coba lagi ya!');

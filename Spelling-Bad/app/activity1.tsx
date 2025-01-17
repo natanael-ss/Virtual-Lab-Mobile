@@ -76,8 +76,10 @@ export default function Activity1() {
               setCurrentQuestion(prev => prev + 1);
               setHintVisible(false);
             } else {
-              Alert.alert('Selesai!', 'Kamu telah menyelesaikan semua pertanyaan!');
-            }
+                    Alert.alert('Congratulations! 🎉', 'You have completed all questions!', [
+                      { text: 'Go to Dashboard', onPress: () => router.push('/dashboard') },
+                    ]);
+                  } 
           },
         },
       ]);

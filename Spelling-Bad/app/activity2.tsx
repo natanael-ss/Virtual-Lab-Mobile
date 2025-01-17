@@ -6,9 +6,9 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
   runOnJS,
 } from 'react-native-reanimated';
+import { useRouter } from 'expo-router';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SPRING_CONFIG = {
@@ -18,10 +18,10 @@ const SPRING_CONFIG = {
 };
 
 const App = () => {
-  const [rectangles, setRectangles] = useState<string[]>(['rectangle1', 'rectangle2', 'rectangle3', 'rectangle4', 'rectangle5']);
+  const router = useRouter(); // Expo Router hook
+  const [rectangles] = useState<string[]>(['rectangle1', 'rectangle2', 'rectangle3', 'rectangle4', 'rectangle5']);
   const [answerSequence, setAnswerSequence] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const positions = rectangles.reduce((acc, rect) => {
     acc[rect] = {
@@ -31,12 +31,7 @@ const App = () => {
       isDragging: useSharedValue(false),
     };
     return acc;
-  }, {} as Record<string, { 
-    x: Animated.SharedValue<number>; 
-    y: Animated.SharedValue<number>; 
-    scale: Animated.SharedValue<number>;
-    isDragging: Animated.SharedValue<boolean>; 
-  }>);
+  }, {} as Record<string, { x: Animated.SharedValue<number>; y: Animated.SharedValue<number>; scale: Animated.SharedValue<number>; isDragging: Animated.SharedValue<boolean> }>);
 
   const page = [
     {
@@ -84,7 +79,7 @@ const App = () => {
   ];
 
   const updateAnswerSequence = (item: string, targetY: number) => {
-    const dropZoneY = 200; // Adjusted drop zone threshold
+    const dropZoneY = 200;
     if (targetY < dropZoneY) {
       setAnswerSequence((prev) => {
         if (!prev.includes(item)) {
@@ -149,10 +144,11 @@ const App = () => {
       if (currentPage < page.length - 1) {
         Alert.alert('Correct! 🎉', 'Moving to the next question...');
         setAnswerSequence([]);
-        setCurrentPage(prev => prev + 1);
+        setCurrentPage((prev) => prev + 1);
       } else {
-        Alert.alert('Congratulations! 🎉', 'You have completed all questions!');
-        setIsCompleted(true);
+        Alert.alert('Congratulations! 🎉', 'You have completed all questions!', [
+          { text: 'Go to Dashboard', onPress: () => router.push('/dashboard') },
+        ]);
       }
     } else {
       Alert.alert('Try Again', 'The sequence is not correct. Keep trying!');
@@ -162,9 +158,9 @@ const App = () => {
   const currentQuestion = page[currentPage];
 
   return (
-    <ScrollView 
+    <ScrollView
       contentContainerStyle={styles.scrollContainer}
-      scrollEnabled={!rectangles.some(rect => positions[rect].isDragging.value)}
+      scrollEnabled={!rectangles.some((rect) => positions[rect].isDragging.value)}
     >
       <View style={styles.header}>
         <Text style={styles.title}>{currentQuestion.judul}</Text>
@@ -186,30 +182,19 @@ const App = () => {
 
       <View style={styles.rectangleContainer}>
         {rectangles.map((rect, index) => (
-          <PanGestureHandler 
-            key={rect} 
-            onGestureEvent={createPanGestureHandler(rect)}
-          >
+          <PanGestureHandler key={rect} onGestureEvent={createPanGestureHandler(rect)}>
             <Animated.View style={[styles.rectangle, getAnimatedStyle(rect)]}>
-              <Text style={styles.rectangleText}>
-                {currentQuestion.recText[index]}
-              </Text>
+              <Text style={styles.rectangleText}>{currentQuestion.recText[index]}</Text>
             </Animated.View>
           </PanGestureHandler>
         ))}
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          onPress={() => setAnswerSequence([])} 
-          style={[styles.button, styles.resetButton]}
-        >
+        <TouchableOpacity onPress={() => setAnswerSequence([])} style={[styles.button, styles.resetButton]}>
           <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={handleConfirmation} 
-          style={[styles.button, styles.confirmButton]}
-        >
+        <TouchableOpacity onPress={handleConfirmation} style={[styles.button, styles.confirmButton]}>
           <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
       </View>
